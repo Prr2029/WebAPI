@@ -6,10 +6,10 @@ namespace WebAPI.Service
     public class EmployeeService
     {
 
-        ProjectDbContext db;
-        public EmployeeService()
+        ProjectDbContext db=null;
+        public EmployeeService(ProjectDbContext dbContext )
         {
-            db = new ProjectDbContext();
+            db = dbContext;
         }
         public bool Add(Employee employee)
         {

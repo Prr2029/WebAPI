@@ -13,11 +13,19 @@ namespace WebAPI.Model
         [Required]
         [Column("FirstName")]
         public string FirstName { get; set; }
+        [Required]
+        [Column("LastName")]
+        public string LastName { get; set; }
+       
+        [Required]
+        [Column("DeptId")]
+        [ForeignKey("Department")]
+        public int DeptId { get; set; }
         
 
         public override string ToString()
         {
-            return $"empid:{EmpId},firstname:{FirstName}";
+            return $"empid:{EmpId},firstname:{FirstName} deptid:{DeptId}";
         }
 
     }
