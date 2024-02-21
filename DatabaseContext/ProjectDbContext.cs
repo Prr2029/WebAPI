@@ -5,13 +5,13 @@ namespace WebAPI.DatabaseContext
 {
     public class ProjectDbContext:DbContext
     {
-        public ProjectDbContext()
+        public ProjectDbContext(DbContextOptions  options):base(options) 
         {
 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=kdac;Integrated Security=True");
+           // optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=kdac;Integrated Security=True");
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
