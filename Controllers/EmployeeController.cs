@@ -8,13 +8,15 @@ using WebAPI.Service;
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/User")]
    
     public class EmployeeController : ControllerBase
     {
         EmployeeService service;
-        public EmployeeController()
+        ProjectDbContext db;
+        public EmployeeController(ProjectDbContext dbContext)
         {
+            db = dbContext;
             service = new EmployeeService();
         }
         // GET: api/<EmployeeController>
@@ -65,15 +67,23 @@ namespace WebAPI.Controllers
              service.Add(emp);
          }*/
 
-        [HttpPost]
-        public void Post([FromBody] AddEmpDTO empdto)
+        [HttpPost("signup")]
+        public void Post([FromBody] Signup model)
         {
-            Employee emp = new Employee();
+            User user = new User();
+            user.EmailId = model.emailId;
+            user.Password = model.password;
+            user.MobileNo = model.mobileNo;
+            db.users.Add(user);
+            db.SaveChanges();
 
             
-            emp.FirstName = empdto.FirstName;
-           
-            service.Add(emp);
+           // service.Add(user);
+
+
+
+
+
         }
 
 

@@ -7,11 +7,16 @@ namespace WebAPI.Service
     {
 
         ProjectDbContext db=null;
+
+        public EmployeeService()
+        {
+        }
+
         public EmployeeService(ProjectDbContext dbContext )
         {
             db = dbContext;
         }
-        public bool Add(Employee employee)
+        public bool Add(User employee)
         {
             db.Add(employee);
             db.SaveChanges();
