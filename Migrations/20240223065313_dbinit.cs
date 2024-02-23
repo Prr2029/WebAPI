@@ -5,24 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
 {
-    public partial class mg10 : Migration
+    public partial class dbinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Email",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<int>(
-                name: "RoleId",
-                table: "User",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "courses",
                 columns: table => new
@@ -35,6 +21,21 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_courses", x => x.CourseId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    EmpId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeptId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.EmpId);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,6 +85,29 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_User_roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "roles",
+                        principalColumn: "RoleId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "courseSubjects",
                 columns: table => new
                 {
@@ -110,11 +134,6 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_RoleId",
-                table: "User",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_courseSubjects_CourseId",
                 table: "courseSubjects",
                 column: "CourseId");
@@ -124,29 +143,25 @@ namespace WebAPI.Migrations
                 table: "courseSubjects",
                 column: "SubjectId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_User_roles_RoleId",
+            migrationBuilder.CreateIndex(
+                name: "IX_User_RoleId",
                 table: "User",
-                column: "RoleId",
-                principalTable: "roles",
-                principalColumn: "RoleId",
-                onDelete: ReferentialAction.Cascade);
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_User_roles_RoleId",
-                table: "User");
-
             migrationBuilder.DropTable(
                 name: "courseSubjects");
+
+            migrationBuilder.DropTable(
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "LogSheets");
 
             migrationBuilder.DropTable(
-                name: "roles");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "courses");
@@ -154,17 +169,8 @@ namespace WebAPI.Migrations
             migrationBuilder.DropTable(
                 name: "subjects");
 
-            migrationBuilder.DropIndex(
-                name: "IX_User_RoleId",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "Email",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "RoleId",
-                table: "User");
+            migrationBuilder.DropTable(
+                name: "roles");
         }
     }
 }

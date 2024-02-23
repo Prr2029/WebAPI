@@ -21,15 +21,15 @@ namespace WebAPI.Controllers
           public IEnumerable<UserRole> Get()
           {
             List<RoleDTO> RoleDTOList = new List<RoleDTO>();
-            foreach (UserRole urole in uservice.GetAllRoles())
-            {
-                RoleDTO edl = new RoleDTO();
+            //foreach (UserRole urole in uservice.GetAllRoles())
+            //{
+            //    RoleDTO edl = new RoleDTO();
 
-                RoleDTOList.Add(edl);
+            //    RoleDTOList.Add(edl);
 
 
-            }
-            return RoleDTOList;
+            //}
+            return (IEnumerable<UserRole>)RoleDTOList;
           
             
           }

@@ -12,8 +12,8 @@ using WebAPI.DatabaseContext;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20240223062121_mg11")]
-    partial class mg11
+    [Migration("20240223065313_dbinit")]
+    partial class dbinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
