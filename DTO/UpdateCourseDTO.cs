@@ -1,4 +1,4 @@
-﻿namespace WebAPI.DTO.CourseDTO
+﻿namespace WebAPI.DTO
 {
     public class UpdateCourseDTO
     {

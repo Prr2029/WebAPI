@@ -15,5 +15,6 @@ namespace WebAPI.Model
         public int SubjectId { get; set; }
 
         public Subject   GetSubject { get; set; }
+        
     }
 }
