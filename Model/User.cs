@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI.Model
@@ -16,7 +15,7 @@ namespace WebAPI.Model
         [Column("Email")]
      public string? Email { get; set; }
         [Required]
-        [Column("UserName")]
+        [Column("EmailId")]
         public string? UserName { get; set; }
         [Required]
         [Column("Password")]
@@ -25,10 +24,10 @@ namespace WebAPI.Model
         [Required]
         [Column("MobileNo")]
         public string? MobileNo { get; set; }
-        
-        [ForeignKey("GetRole")]
+        [Required]
+        [Column("RoleId")]
+        [ForeignKey("Role")]
         public int RoleId { get; set; }
-        public UserRole GetRole { get; set; } 
 
 
 
