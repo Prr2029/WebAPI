@@ -17,15 +17,15 @@ namespace WebAPI.Controllers
         public LoginController(IConfiguration config, ProjectDbContext db)
         {
             _config = config;
-            _db = db;
+            _db= db;
+
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] LoginRequest loginRequest)
         {
-            var user = _db.users.Where(u => u.Email == loginRequest.UserName && u.Password == loginRequest.Password).Include(u => u.GetRole).FirstOrDefault();
-            if (user != null)
-            {
+            var user = _db.users.Where(u => u.Email == loginRequest.UserName && u.Password == loginRequest.Password).Include(u=>u.GetRole).FirstOrDefault();
+            if (user != null) {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -37,11 +37,11 @@ namespace WebAPI.Controllers
 
                 var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-                return Ok(new { name = user.UserName, email = user.Email, role = user.GetRole.RoleName, token });
+                return Ok(new { name = user.UserName, role = user.GetRole.RoleName, token });
             }
             else
             {
-                return Ok(new { error = "Invalid user name or Password" });
+                return Ok(new { error = "Invalid Username or Password" });
             }
         }
     }
