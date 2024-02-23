@@ -9,6 +9,6 @@ namespace WebAPI.Model
          [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+       public string RoleName { get; set; }
     }
 }
