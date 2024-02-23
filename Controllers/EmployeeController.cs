@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
         public void Post([FromBody] Signup model)
         {
             User user = new User();
-            user.EmailId = model.emailId;
+            //user.EmailId = model.emailId;
             user.Password = model.password;
             user.MobileNo = model.mobileNo;
             db.users.Add(user);
