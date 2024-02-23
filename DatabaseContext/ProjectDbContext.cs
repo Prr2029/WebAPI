@@ -18,7 +18,7 @@ namespace WebAPI.DatabaseContext
         {
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Employee> Employees { get; set; }
+        
         public DbSet<User> users { get; set; }
 
     }
