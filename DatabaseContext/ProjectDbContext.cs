@@ -20,7 +20,7 @@ namespace WebAPI.DatabaseContext
         {
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Employee> Employees { get; set; }
+        
         public DbSet<User> users { get; set; }
         public DbSet<Course> courses { get; set; }
         public DbSet<Subject> subjects { get; set; }
