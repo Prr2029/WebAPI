@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
 
 
         }
-        [HttpPut("{id}")]
+      /*  [HttpPut("{id}")]
         public void Put(int id, [FromBody] ModifyEmpDTO empdto)
         {
             Employee tomodify = service.FindById(id);
@@ -100,7 +100,7 @@ namespace WebAPI.Controllers
             tomodify.IsResigned = empdto.IsResigned;
             tomodify.UserId = empdto.UserId;
             service.Modify(tomodify);
-        }
+        }*/
 
 
     }
