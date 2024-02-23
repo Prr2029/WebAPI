@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 //import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 import axios from "axios";
-//import { addUser } from "../features/userSlice";
 
 const Login = () => {
   //const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Login = () => {
     } else if (Password.length === 0) {
       toast.warn('Please enter your password');
     } else {
-      axios.post("http://localhost:3000/signin", loginInfo)
+      axios.post("http://localhost:8080/signin", loginInfo)
         .then((result) => {
           if (result.status === 200) {
             toast.success('Logged in successfully');
