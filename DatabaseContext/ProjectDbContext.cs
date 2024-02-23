@@ -4,7 +4,9 @@ using WebAPI.Model;
 namespace WebAPI.DatabaseContext
 {
     public class ProjectDbContext:DbContext
+
     {
+        ProjectDbContext dbContext = null;
         public ProjectDbContext(DbContextOptions  options):base(options) 
         {
 

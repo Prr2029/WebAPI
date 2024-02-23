@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
           public IEnumerable<UserRole> Get()
           {
             List<RoleDTO> RoleDTOList = new List<RoleDTO>();
-            foreach (Employee emp in service.GetAllRoles())
+            foreach (UserRole urole in uservice.GetAllRoles())
             {
                 RoleDTO edl = new RoleDTO();
 
@@ -30,6 +30,7 @@ namespace WebAPI.Controllers
 
             }
             return RoleDTOList;
+          
             
           }
 
