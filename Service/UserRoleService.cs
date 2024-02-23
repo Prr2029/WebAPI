@@ -24,7 +24,7 @@ namespace WebAPI.Service
             db.SaveChanges();
             return true;
         }
-        public bool Put(int id, UserRole Role)
+        public bool Put(int id)
         {
             UserRole role = db.roles.Find(id);
             db.roles.Update(role);
