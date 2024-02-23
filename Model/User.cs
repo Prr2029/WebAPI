@@ -12,8 +12,11 @@ namespace WebAPI.Model
         [Column("UserId")]
         public int UserId { get; set; }
         [Required]
+        [Column("Email")]
+     public string? Email { get; set; }
+        [Required]
         [Column("EmailId")]
-     public string? EmailId { get; set; }
+        public string? UserName { get; set; }
         [Required]
         [Column("Password")]
         public string? Password { get; set; }
@@ -21,19 +24,18 @@ namespace WebAPI.Model
         [Required]
         [Column("MobileNo")]
         public string? MobileNo { get; set; }
-       
+        [Required]
+        [Column("RoleId")]
+        [ForeignKey("Role")]
+        public int RoleId { get; set; }
 
-        
 
-        /*public int RoleId { get; set; }
-        public string Name { get; set; }
 
-        public string AdharNumber { get; set; }
-        public string Address { get; set; }*/
+
 
         public override string ToString()
         {
-            return $"UserId: {UserId}, EmailId: {EmailId}, Password: {Password}, MobileNo: {MobileNo}";
+            return $"UserId: {UserId}, EmailId: {Email},UserName:{UserName},RoleId:{RoleId}, Password: {Password}, MobileNo: {MobileNo}";
         }
     }
 }
