@@ -1,42 +1,52 @@
-﻿/*using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using WebAPI.DTO;
 using WebAPI.Model;
+using WebAPI.Service;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[auth]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        // Controllers/AuthController.cs
+        UserService service;
 
-
-
-
-        [HttpPost("signup")]
-        public IActionResult SignUp([FromBody] Signup model)
+        public UserController()
         {
-            User user = new User();
-            user.EmailId = model.emailId;
-            user.MobileNo = model.mobileNo;
-
-
-            var result = _userManager.CreateAsync(user, model.password).Result;
-
-            if (result.Succeeded)
-            {
-                return Ok(new { Message = "User registered successfully" });
-            }
-
-            return BadRequest(new { Message = "Error registering user", Errors = result.Errors });
+            service = new UserService();
         }
 
 
+        [HttpPost]
+        public void Post([FromBody] UserDTO userdto)
+        {
+            User user = new User();
+            user.UserName = userdto.UserName;
+
+            user.Email = userdto.Email;
+            user.Password = userdto.Password;
+            user.RoleId = userdto.RoleId;
+            service.Add(user);
+
+
+
+
+        }
+        public IEnumerable<UserDTO> Get()
+        {
+            List<UserDTO> UserDTOList = new List<UserDTO>();
+            foreach (User user in service.GetAllUsers())
+            {
+                UserDTO edl = new UserDTO();
+
+                UserDTOList.Add(edl);
+
+
+            }
+            return UserDTOList;
+
+
+        }
     }
-*/
+}
