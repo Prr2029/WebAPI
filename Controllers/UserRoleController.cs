@@ -6,7 +6,7 @@ using WebAPI.Service;
 
 namespace WebAPI.Controllers
 {
-    [Route("userrole")]
+    [Route("/userrole")]
     [ApiController]
     public class UserRoleController : ControllerBase
     {
@@ -21,15 +21,15 @@ namespace WebAPI.Controllers
           public IEnumerable<RoleDTO> Get()
           {
             List<RoleDTO> RoleDTOList = new List<RoleDTO>();
-            //foreach (UserRole urole in uservice.GetAllRoles())
-            //{
-            //    RoleDTO edl = new RoleDTO();
+            foreach (UserRole urole in uservice.GetAllRoles())
+            {
+               RoleDTO edl = new RoleDTO();
 
-            //    RoleDTOList.Add(edl);
+                RoleDTOList.Add(edl);
 
 
-            //}
-            return (IEnumerable<UserRole>)RoleDTOList;
+            }
+            return RoleDTOList;
           
             
           }

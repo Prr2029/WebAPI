@@ -17,15 +17,12 @@ namespace WebAPI.Controllers
         public LoginController(IConfiguration config, ProjectDbContext db)
         {
             _config = config;
-            _db= db;
-
-        }
+ }
 
         [HttpPost]
         public IActionResult Post([FromBody] LoginRequest loginRequest)
         {
-            var user = _db.users.Where(u => u.Email == loginRequest.UserName && u.Password == loginRequest.Password).Include(u=>u.GetRole).FirstOrDefault();
-            if (user != null) {
+
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 

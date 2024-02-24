@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.DatabaseContext;
-using WebAPI.DTO.CourseDTO;
+using WebAPI.DTO;
 using WebAPI.Model;
 using WebAPI.Service;
 
@@ -28,6 +28,18 @@ namespace WebAPI.Controllers
                 courseDTOList.Add( cDTO );
             }
             return courseDTOList;
+        }
+
+        public void post([FromBody] AddCourseDTO coursetDTO)
+        {
+            Course course = new Course();
+            course.CourseName= coursetDTO.CourseName;
+            course.Duration= coursetDTO.Duration;
+            service.AddCourse(course);
+           
+
+
+            
         }
     }
 }
