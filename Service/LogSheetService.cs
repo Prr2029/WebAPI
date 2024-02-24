@@ -3,25 +3,27 @@ using WebAPI.Model;
 
 namespace WebAPI.Service
 {
-    public class LogSheetService
+    public class LogsheetService
     {
         ProjectDbContext db = null;
-        public LogSheetService(ProjectDbContext dbContext)
+        public LogsheetService(ProjectDbContext dbContext)
         {
             db = dbContext;
 
 
         }
-        public LogSheetService()
+        public LogsheetService()
         {
 
         }
-
-        public bool Add(LogSheet logsheet)
+        public bool Add(LogSheet log)
         {
-            db.LogSheets.Add(logsheet);
+            db.Add(log);
             db.SaveChanges();
             return true;
+
         }
+
+
     }
 }
