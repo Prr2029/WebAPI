@@ -4,7 +4,7 @@
 
 namespace WebAPI.Migrations
 {
-    public partial class mg3 : Migration
+    public partial class mg14 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

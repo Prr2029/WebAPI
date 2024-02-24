@@ -4,9 +4,7 @@ using WebAPI.Model;
 namespace WebAPI.DatabaseContext
 {
     public class ProjectDbContext:DbContext
-
     {
-        ProjectDbContext dbContext = null;
         public ProjectDbContext(DbContextOptions  options):base(options) 
         {
 
@@ -22,13 +20,6 @@ namespace WebAPI.DatabaseContext
         }
         
         public DbSet<User> users { get; set; }
-        public DbSet<Course> courses { get; set; }
-        public DbSet<Subject> subjects { get; set; }
-        public DbSet<LogSheet> LogSheets { get; set; }
-        public DbSet<UserRole> roles { get; set; }
-        public DbSet<CourseSubject> courseSubjects { get; set; }
-
-
 
     }
 }

@@ -12,8 +12,8 @@ using WebAPI.DatabaseContext;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20240223062121_mg11")]
-    partial class mg11
+    [Migration("20240223093609_mg14")]
+    partial class mg14
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,34 +67,6 @@ namespace WebAPI.Migrations
                     b.ToTable("courseSubjects");
                 });
 
-            modelBuilder.Entity("WebAPI.Model.Employee", b =>
-                {
-                    b.Property<int>("EmpId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("EmpId");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"), 1L, 1);
-
-                    b.Property<int>("DeptId")
-                        .HasColumnType("int")
-                        .HasColumnName("DeptId");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FirstName");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("LastName");
-
-                    b.HasKey("EmpId");
-
-                    b.ToTable("Employee");
-                });
-
             modelBuilder.Entity("WebAPI.Model.LogSheet", b =>
                 {
                     b.Property<int>("LogSheetId")
@@ -106,6 +78,9 @@ namespace WebAPI.Migrations
                     b.Property<string>("ApprovedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("LogDateTime")
                         .HasColumnType("datetime2");
@@ -122,11 +97,20 @@ namespace WebAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("verifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LogSheetId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LogSheets");
                 });
@@ -227,6 +211,33 @@ namespace WebAPI.Migrations
                     b.Navigation("GetCourse");
 
                     b.Navigation("GetSubject");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.LogSheet", b =>
+                {
+                    b.HasOne("WebAPI.Model.Course", "GetCourse")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.Subject", "GetSubject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.User", "GetUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GetCourse");
+
+                    b.Navigation("GetSubject");
+
+                    b.Navigation("GetUser");
                 });
 
             modelBuilder.Entity("WebAPI.Model.User", b =>
