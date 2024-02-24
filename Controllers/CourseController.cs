@@ -37,9 +37,22 @@ namespace WebAPI.Controllers
             course.Duration= coursetDTO.Duration;
             service.AddCourse(course);
            
+  
+        }
+        [HttpPut("id")]
+        public void put(int id, [FromBody] SubjectDTO subDTO)
+
+        {
+            service.UpdateCourse(id);
 
 
-            
+        }
+        [HttpDelete("id")]
+        public bool remove(int id)
+        {
+            //Subject sub = service.findById(id);
+            service.DeleteCourse(id);
+            return true;
         }
     }
 }

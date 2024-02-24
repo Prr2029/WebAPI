@@ -8,7 +8,7 @@ using WebAPI.DatabaseContext;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("login")]
     [ApiController]
     public class LoginController : ControllerBase
     {

@@ -11,6 +11,8 @@ namespace WebAPI.Model
         public int LogSheetId { get; set; }
         [ForeignKey("GetUser")]
         public int UserId { get; set; }
+        public DateTime StartTime { get; set; }
+
 
         public DateTime EndTime { get; set; }
         public string LogType {  get; set; }
