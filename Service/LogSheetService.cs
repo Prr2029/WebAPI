@@ -1,7 +1,4 @@
-﻿using WebAPI.DatabaseContext;
-using WebAPI.Model;
-
-namespace WebAPI.Service
+﻿namespace WebAPI.Service
 {
     public class LogsheetService
     {
