@@ -1,27 +1,9 @@
-﻿using WebAPI.DatabaseContext;
-using WebAPI.Model;
-
-namespace WebAPI.Service
+﻿namespace WebAPI.Service
 {
-    public class LogSheetService
+    public class LogsheetService
     {
-        ProjectDbContext db = null;
-        public LogSheetService(ProjectDbContext dbContext)
-        {
-            db = dbContext;
+        public LogsheetService() { }
 
 
-        }
-        public LogSheetService()
-        {
-
-        }
-
-        public bool Add(LogSheet logsheet)
-        {
-            db.LogSheets.Add(logsheet);
-            db.SaveChanges();
-            return true;
-        }
     }
 }
