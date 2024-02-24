@@ -11,7 +11,7 @@ namespace WebAPI.Model
         public int LogSheetId { get; set; }
         [ForeignKey("GetUser")]
         public int UserId { get; set; }
-        public DateTime startTime { get; set; }
+
         public DateTime EndTime { get; set; }
         public string LogType {  get; set; }
         [ForeignKey("GetCourse")]
@@ -29,7 +29,7 @@ namespace WebAPI.Model
 
         public override string ToString()
         {
-            return $"logId: {LogSheetId}";
+
         }
     }
 }
