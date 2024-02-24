@@ -24,7 +24,7 @@ namespace WebAPI.Service
             db.SaveChanges();
             return true;
         }
-        public bool UpdateCourse(int courseId,Course course)
+        public bool UpdateCourse(int courseId)
         {
             Course couId = db.courses.Find(courseId);
             db.Update(couId);

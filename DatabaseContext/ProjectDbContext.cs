@@ -20,6 +20,12 @@ namespace WebAPI.DatabaseContext
         }
         
         public DbSet<User> users { get; set; }
+        public DbSet<Subject> subjects { get; set; }
+        public DbSet<Course> courses { get; set; }
+        public DbSet<CourseSubject> coursesubjects { get; set; }
+        public DbSet<UserRole> roles { get; set; }
+        public DbSet<LogSheet> logsheets { get; set; }
+        public DbSet<LabPlan> labplans { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ using WebAPI.Service;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("logsheet")]
     [ApiController]
     public class LogsheetController : ControllerBase
     {
@@ -14,14 +14,15 @@ namespace WebAPI.Controllers
         ProjectDbContext _db;
         public LogsheetController(ProjectDbContext db)
         {
-                _db = db;
+            _db = db;
             service = new CourseService();
         }
         [HttpGet]
         public IEnumerable<LogSheetDTO> LogsheetByStaff(int id)
 
         {
-            var result = _db.LogSheets.Where(l => l.LogSheetId == id).ToList();
-            return result;
+            var result = _db.logsheets.Where(l => l.LogSheetId == id).ToList();
+            return (IEnumerable<LogSheetDTO>)result;
         }
+    }
 }
