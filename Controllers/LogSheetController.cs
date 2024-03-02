@@ -6,7 +6,7 @@ using WebAPI.Service;
 
 namespace WebAPI.Controllers
 {
-    [Route("logsheet")]
+    [Route("api/[controller]")]
     [ApiController]
     public class LogsheetController : ControllerBase
     {

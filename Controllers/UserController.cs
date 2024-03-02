@@ -33,6 +33,7 @@ namespace WebAPI.Controllers
 
 
         }
+        [HttpGet]
         public IEnumerable<UserDTO> Get()
         {
             List<UserDTO> UserDTOList = new List<UserDTO>();
