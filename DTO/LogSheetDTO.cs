@@ -7,18 +7,21 @@ namespace WebAPI.DTO
     {
         
         public int LogSheetId { get; set; }
-        public DateTime LogDateTime { get; set; }
+        public int UserId { get;set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string LogType {  get; set; }
         
         public int SubjectId { get; set; }
+        public int CourseId { get; set; }
         
         public string Topic { get; set; }
-        public string verifiedBy { get; set; }
-        public string ApprovedBy { get; set; }
+        public int verifiedBy { get; set; }
+        public int ApprovedBy { get; set; }
 
         public override string ToString()
         {
-            return $"logId: {LogSheetId}, datetime: {LogDateTime},subId:{SubjectId}";
+            return $"logId: {LogSheetId}, subId:{SubjectId}";
         }
     }
 }

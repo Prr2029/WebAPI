@@ -9,13 +9,13 @@ namespace WebAPI.Model
        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("UserId")]
+        
         public int UserId { get; set; }
         [Required]
         [Column("Email")]
      public string? Email { get; set; }
         [Required]
-        [Column("EmailId")]
+        [Column("UserName")]
         public string? UserName { get; set; }
         [Required]
         [Column("Password")]
@@ -26,8 +26,9 @@ namespace WebAPI.Model
         public string? MobileNo { get; set; }
         [Required]
         [Column("RoleId")]
-        [ForeignKey("Role")]
+        [ForeignKey("GetRole")]
         public int RoleId { get; set; }
+        public UserRole GetRole { get; set; }
 
 
 

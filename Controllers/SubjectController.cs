@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.DatabaseContext;
 using WebAPI.DTO;
 using WebAPI.Model;
 using WebAPI.Service;
@@ -11,7 +12,9 @@ namespace WebAPI.Controllers
     public class SubjectController : ControllerBase
     {
         SubjectService service;
-        public SubjectController() {
+        private ProjectDbContext dbContext;
+        public SubjectController(ProjectDbContext db) {
+            dbContext = db;
             service = new SubjectService();
 
 
@@ -22,9 +25,12 @@ namespace WebAPI.Controllers
         public IEnumerable<SubjectDTO> Get()
         {
             List<SubjectDTO> SubjectDTOList = new List<SubjectDTO>();
-            foreach (Subject sub in service.GetAllSubjects())
+            foreach (Subject sub in dbContext.subjects.ToList<Subject>())
             {
                 SubjectDTO edl = new SubjectDTO();
+                sub.SubjectName=    edl.SubjectName;
+                sub.LabHrs = edl.LabHrs;
+                sub.TheoryHrs=edl.TheoryHrs;
 
                 SubjectDTOList.Add(edl);
 
@@ -42,14 +48,17 @@ namespace WebAPI.Controllers
             subject.TheoryHrs= subjectDTO.TheoryHrs;
 
 
-            service.Add(subject);
+            dbContext.subjects.Add(subject);
+            dbContext.SaveChanges();
         }
 
         [HttpPut("id")]
-        public void put(int id, [FromBody]  SubjectDTO subDTO)
+        public bool put(int id, [FromBody]  SubjectDTO subDTO)
 
         {
-            service.Put(id);
+            Subject sub = dbContext.subjects.Find(id);
+            dbContext.subjects.Update(sub);
+            return true;
 
 
         }
@@ -57,7 +66,8 @@ namespace WebAPI.Controllers
         public bool remove(int id)
         {
             //Subject sub = service.findById(id);
-            service.Delete(id);
+            Subject sub = dbContext.subjects.Find(id);
+            dbContext.subjects.Remove(sub);
             return true;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace WebAPI.Model
 {
@@ -9,7 +10,7 @@ namespace WebAPI.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LogSheetId { get; set; }
-        [ForeignKey("GetUser")]
+        [ForeignKey("User")]
         public int UserId { get; set; }
         public DateTime StartTime { get; set; }
 
@@ -23,15 +24,15 @@ namespace WebAPI.Model
         public int SubjectId { get; set; }
         [StringLength(50)]
         public string Topic { get; set; }
-        public string verifiedBy { get; set; }
-        public string ApprovedBy { get; set; }
+        [ForeignKey("User")]
+        [DefaultValue(false)]
+        public int verifiedBy { get; set; }
+        [ForeignKey("User")]
+        public int ApprovedBy { get; set; }
         public User GetUser { get; set; } 
         public Subject GetSubject { get; set; }
         public Course GetCourse { get; set; }
 
-        public override string ToString()
-        {
-
-        }
+    
     }
 }

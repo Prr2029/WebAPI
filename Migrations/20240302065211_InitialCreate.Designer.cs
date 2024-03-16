@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.DatabaseContext;
 
@@ -11,9 +12,10 @@ using WebAPI.DatabaseContext;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302065211_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("courseSubjects");
+                    b.ToTable("coursesubjects");
                 });
 
             modelBuilder.Entity("WebAPI.Model.LabPlan", b =>

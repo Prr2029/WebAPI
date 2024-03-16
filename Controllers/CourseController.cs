@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
             db = dbContext;
             service = new CourseService();
         }
+        [HttpGet]
         public IEnumerable<GetCourseDTO> GetAllCourses()
         {
             List<GetCourseDTO> courseDTOList = new List<GetCourseDTO>();
@@ -29,7 +30,7 @@ namespace WebAPI.Controllers
             }
             return courseDTOList;
         }
-
+        [HttpPost]
         public void post([FromBody] AddCourseDTO coursetDTO)
         {
             Course course = new Course();
