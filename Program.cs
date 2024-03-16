@@ -9,6 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+               builder =>
+               {
+                   builder
+                   .WithOrigins("http://localhost:3000")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
+               }));    
+        
+
 builder.Services.AddDbContext<ProjectDbContext>((options) =>
 {
     options.UseSqlServer("name=MyConnectionDetails");

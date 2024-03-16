@@ -15,7 +15,7 @@ namespace WebAPI.Model
         [Column("Email")]
      public string? Email { get; set; }
         [Required]
-        [Column("EmailId")]
+        [Column("UserName")]
         public string? UserName { get; set; }
         [Required]
         [Column("Password")]

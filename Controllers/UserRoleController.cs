@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.DatabaseContext;
 using WebAPI.DTO;
 using WebAPI.Model;
 using WebAPI.Service;
@@ -10,9 +11,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserRoleController : ControllerBase
     {
-        UserRoleService uservice;
-        public UserRoleController() {
-            uservice = new UserRoleService();
+        
+        private ProjectDbContext db;
+        public UserRoleController(ProjectDbContext _db) {
+            db=_db;
+
+            
 
 
         }
@@ -21,9 +25,10 @@ namespace WebAPI.Controllers
           public IEnumerable<RoleDTO> Get()
           {
             List<RoleDTO> RoleDTOList = new List<RoleDTO>();
-            foreach (UserRole urole in uservice.GetAllRoles())
+            foreach (UserRole urole in db.roles.ToList<UserRole>() )
             {
                RoleDTO edl = new RoleDTO();
+                urole.RoleName = urole.RoleName;
 
                 RoleDTOList.Add(edl);
 
@@ -35,10 +40,13 @@ namespace WebAPI.Controllers
           }
 
         [HttpPut("id")]
-        public void put(int id,[FromBody]RoleDTO roleDTO)
+        public bool put(int id,[FromBody]RoleDTO roleDTO)
 
         {
-            uservice.Put(id);
+            UserRole role = db.roles.Find(id);
+
+            db.roles.Update(role);
+            return true;
 
 
         }

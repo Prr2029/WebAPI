@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.DatabaseContext;
 using WebAPI.DTO;
 using WebAPI.Model;
 using WebAPI.Service;
@@ -11,10 +12,10 @@ namespace WebAPI.Controllers
     public class UserController : ControllerBase
     {
         UserService service;
-
-        public UserController()
+        private ProjectDbContext _db;
+        public UserController(ProjectDbContext db)
         {
-            service = new UserService();
+            _db = db;
         }
 
 
@@ -26,8 +27,12 @@ namespace WebAPI.Controllers
 
             user.Email = userdto.Email;
             user.Password = userdto.Password;
+            user.MobileNo = userdto.MobileNo;
             user.RoleId = userdto.RoleId;
-            service.Add(user);
+           // user.GetRole.RoleName=userdto.GetRole.RoleName;
+            _db.users.Add(user);
+            _db.SaveChanges();
+
 
 
 
@@ -36,16 +41,23 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IEnumerable<UserDTO> Get()
         {
-            List<UserDTO> UserDTOList = new List<UserDTO>();
-            foreach (User user in service.GetAllUsers())
-            {
-                UserDTO edl = new UserDTO();
+             List<UserDTO> UserDTOList = new List<UserDTO>();
+             foreach (User user in _db.users.ToList<User>())
+             {
+                 UserDTO edl = new UserDTO();
+                  edl.UserName = user.UserName;
+                    edl.Email = user.Email;
+                    edl.Password = user.Password;
+                    edl.RoleId = user.RoleId;
+                edl.GetRole = user.GetRole;
+                            
 
-                UserDTOList.Add(edl);
+                 UserDTOList.Add(edl);
 
 
-            }
-            return UserDTOList;
+             }
+             return UserDTOList;
+         
 
 
         }

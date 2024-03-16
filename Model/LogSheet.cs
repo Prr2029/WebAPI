@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace WebAPI.Model
 {
@@ -24,6 +25,7 @@ namespace WebAPI.Model
         [StringLength(50)]
         public string Topic { get; set; }
         [ForeignKey("User")]
+        [DefaultValue(false)]
         public int verifiedBy { get; set; }
         [ForeignKey("User")]
         public int ApprovedBy { get; set; }
