@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WebAPI.Model;
 
 namespace WebAPI.DTO
 {
@@ -18,10 +19,13 @@ namespace WebAPI.DTO
         public string Topic { get; set; }
         public int verifiedBy { get; set; }
         public int ApprovedBy { get; set; }
+            public User GetUser { get; set; }
+            public Course GetCourse { get; set; }
+        public Subject GetSubject { get; set; }
 
-        public override string ToString()
-        {
-            return $"logId: {LogSheetId}, subId:{SubjectId}";
-        }
+
+        
+
+      
     }
 }

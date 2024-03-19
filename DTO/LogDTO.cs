@@ -6,8 +6,8 @@ namespace WebAPI.DTO
     public class LogDTO
     {
 
-        
-        public DateTime LogDateTime { get; set; }
+        public int LogSheetId { get; set; }
+     //public DateTime LogDateTime { get; set; }
         public string LogType { get; set; }
 
         public int UserId { get; set; }

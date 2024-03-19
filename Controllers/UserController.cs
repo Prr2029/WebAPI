@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.DatabaseContext;
 using WebAPI.DTO;
 using WebAPI.Model;
@@ -18,26 +19,28 @@ namespace WebAPI.Controllers
             _db = db;
         }
 
-
+        
         [HttpPost]
-        public void Post([FromBody] UserDTO userdto)
-        {
-            User user = new User();
-            user.UserName = userdto.UserName;
+          public void Post([FromBody] UserDTO userdto)
+          {
+              User user = new User();
+              user.UserName = userdto.UserName;
 
-            user.Email = userdto.Email;
-            user.Password = userdto.Password;
-            user.MobileNo = userdto.MobileNo;
-            user.RoleId = userdto.RoleId;
-           // user.GetRole.RoleName=userdto.GetRole.RoleName;
-            _db.users.Add(user);
-            _db.SaveChanges();
-
-
+              user.Email = userdto.Email;
+              user.Password = userdto.Password;
+              user.MobileNo = userdto.MobileNo;
+              user.RoleId = userdto.RoleId;
+             // user.GetRole.RoleName=userdto.GetRole.RoleName;
+              _db.users.Add(user);
+              _db.SaveChanges();
 
 
 
-        }
+
+
+
+          }
+       
         [HttpGet]
         public IEnumerable<UserDTO> Get()
         {

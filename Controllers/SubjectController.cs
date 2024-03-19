@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         private ProjectDbContext dbContext;
         public SubjectController(ProjectDbContext db) {
             dbContext = db;
-            service = new SubjectService();
+            
 
 
         }
@@ -27,10 +27,12 @@ namespace WebAPI.Controllers
             List<SubjectDTO> SubjectDTOList = new List<SubjectDTO>();
             foreach (Subject sub in dbContext.subjects.ToList<Subject>())
             {
+                Console.WriteLine(sub.SubjectName);
                 SubjectDTO edl = new SubjectDTO();
-                sub.SubjectName=    edl.SubjectName;
-                sub.LabHrs = edl.LabHrs;
-                sub.TheoryHrs=edl.TheoryHrs;
+                 edl.SubjectId  = sub.SubjectId;
+                edl.SubjectName = sub.SubjectName;
+                edl.TheoryHrs = sub.TheoryHrs;
+                edl.LabHrs  = sub.LabHrs;
 
                 SubjectDTOList.Add(edl);
 

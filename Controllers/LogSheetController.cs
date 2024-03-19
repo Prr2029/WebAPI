@@ -16,17 +16,43 @@ namespace WebAPI.Controllers
         public LogsheetController(ProjectDbContext db)
         {
             _db = db;
-            service = new CourseService();
+            
         }
+        /* [HttpGet]
+         public IEnumerable<LogSheetDTO> LogsheetByStaff(int id)
+
+         {
+             var result = _db.logsheets.Where(l => l.LogSheetId == id).ToList();
+             return (IEnumerable<LogSheetDTO>)result;
+         }*/
+
         [HttpGet]
-        public IEnumerable<LogSheetDTO> LogsheetByStaff(int id)
-
+        public ActionResult<IEnumerable<LogDTO>> Get()
         {
-            var result = _db.logsheets.Where(l => l.LogSheetId == id).ToList();
-            return (IEnumerable<LogSheetDTO>)result;
-        }
+            var logSheetDTOs = _db.logsheets.Select(logSheet => new LogDTO
+            {
+                LogSheetId = logSheet.LogSheetId,
+                UserId = logSheet.UserId,
+                StartTime = logSheet.StartTime,
+                EndTime = logSheet.EndTime,
+                LogType = logSheet.LogType,
+               // SubjectId = logSheet.SubjectId,
+               // CourseId = logSheet.CourseId,
+               // Topic = logSheet.Topic,
+               // verifiedBy = logSheet.verifiedBy,
+               // ApprovedBy = logSheet.ApprovedBy
+            }).ToList();
 
-        [HttpPost]
+            return logSheetDTOs;
+        }
+            
+            
+        
+
+
+
+
+            [HttpPost]
         public bool AddLog([FromBody] LogSheetDTO logSheetDTO)
         {
             LogSheet log = new LogSheet();

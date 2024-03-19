@@ -20,16 +20,26 @@ namespace WebAPI.Controllers
             service = new CourseService();
         }
         [HttpGet]
-        public IEnumerable<GetCourseDTO> GetAllCourses()
+        public IEnumerable<GetCourseDTO> Get()
         {
-            List<GetCourseDTO> courseDTOList = new List<GetCourseDTO>();
-            foreach (Course cour in service.GetAllCourse() )
+            List<GetCourseDTO> CourseDTOList = new List<GetCourseDTO>();
+            foreach (Course course in db.courses.ToList<Course>())
             {
-                GetCourseDTO cDTO = new GetCourseDTO();
-                courseDTOList.Add( cDTO );
+                GetCourseDTO edl = new GetCourseDTO();
+                edl.courseId = course.CourseId;
+                edl.CourseName = course.CourseName;
+                edl.Duration = course.Duration;
+
+                CourseDTOList.Add(edl);
+
+
             }
-            return courseDTOList;
+            return CourseDTOList;
+
+
+
         }
+
         [HttpPost]
         public void post([FromBody] AddCourseDTO coursetDTO)
         {
@@ -37,6 +47,7 @@ namespace WebAPI.Controllers
             course.CourseName= coursetDTO.CourseName;
             course.Duration= coursetDTO.Duration;
             service.AddCourse(course);
+            db.SaveChanges();
            
   
         }
