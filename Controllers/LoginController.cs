@@ -17,6 +17,7 @@ namespace WebAPI.Controllers
         public LoginController(IConfiguration config, ProjectDbContext db)
         {
             _config = config;
+                _db = db;
  }
 
         [HttpPost]
