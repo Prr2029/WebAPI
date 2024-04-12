@@ -19,6 +19,6 @@ namespace WebAPI.DTO
 
         
         public int RoleId { get; set; }
-        public UserRole GetRole { get; set; }
+        
     }
 }
